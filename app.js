@@ -13,7 +13,12 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://YOUR-NETLIFY-SITE.netlify.app"],
+    credentials: true,
+  }),
+);
 
 // ✅ 2. create HTTP server
 const server = http.createServer(app);
