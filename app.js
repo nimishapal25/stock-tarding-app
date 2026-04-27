@@ -10,7 +10,7 @@ const { initSocket } = require("./services/socket");
 
 // ✅ 1. create app
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(
@@ -44,9 +44,6 @@ mongoose
   .connect(DB)
   .then(() => {
     console.log("DB connected successfully");
-    // app.listen(port, () => {
-    //   console.log(`Server is successfully running at http://localhost:${port}`);
-    // });
     server.listen(port, () => {
       console.log(`Server running at http://localhost:${port}`);
     });
