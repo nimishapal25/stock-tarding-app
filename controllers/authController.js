@@ -89,7 +89,7 @@ exports.ZerodhaCallback = async (req, res) => {
     // 🔥 START WEBSOCKET HERE
     tickerService.startTicker(process.env.KITE_API_KEY, access_token);
 
-    res.redirect("http://localhost:5173/dashboard");
+    res.redirect("https://stock-tarding-app-fe.onrender.com/dashboard");
   } catch (err) {
     res.status(500).send("Auth failed");
   }
