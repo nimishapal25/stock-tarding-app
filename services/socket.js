@@ -2,7 +2,7 @@ let io;
 
 exports.initSocket = (server) => {
   const { Server } = require("socket.io");
-  const io = new Server(server, {
+  io = new Server(server, {
     cors: {
       origin: [
         "http://localhost:5173",
