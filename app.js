@@ -15,7 +15,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://YOUR-NETLIFY-SITE.netlify.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://stock-tarding-app-fe.onrender.com",
+    ],
     credentials: true,
   }),
 );
