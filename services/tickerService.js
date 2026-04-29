@@ -6,6 +6,7 @@ let latestTicksMap = new Map();
 let started = false;
 
 exports.startTicker = (apiKey, accessToken, instrumentTokens) => {
+  console.log("startTicker called");
   if (started) return;
   started = true;
 
@@ -19,11 +20,13 @@ exports.startTicker = (apiKey, accessToken, instrumentTokens) => {
   ticker.connect();
 
   ticker.on("connect", () => {
+    console.log("Ticker connected. Subscribing", tokens.length);
     ticker.subscribe(tokens);
     ticker.setMode(ticker.modeFull, tokens);
   });
 
   ticker.on("ticks", (ticks) => {
+    console.log("ticks received:", ticks.length);
     const updates = [];
 
     for (const t of ticks) {
@@ -54,11 +57,14 @@ exports.startTicker = (apiKey, accessToken, instrumentTokens) => {
 
 exports.getAllStocks = (page = 1, limit = 5) => {
   const all = Array.from(latestTicksMap.values());
+
   const total = all.length;
   const totalPages = Math.max(1, Math.ceil(total / limit));
   const currentPage = Math.min(Math.max(page, 1), totalPages);
+
   const start = (currentPage - 1) * limit;
-  const data = all.slice(start, start + limit);
+  const end = start + limit;
+  const data = all.slice(start, end);
 
   return {
     data,

@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const AppError = require("./../utils/appError");
 const kite = require("../utils/zerodha");
 const tickerService = require("../services/tickerService");
+require("dotenv").config({ path: "./config.env" });
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -89,7 +90,7 @@ exports.ZerodhaCallback = async (req, res) => {
     // 🔥 START WEBSOCKET HERE
     tickerService.startTicker(process.env.KITE_API_KEY, access_token);
 
-    res.redirect("https://stock-tarding-app-fe.onrender.com/dashboard");
+    res.redirect("https://stock-tarding-app-fe.onrender.com/dashboard"); //TODO chnage in prod
   } catch (err) {
     res.status(500).send("Auth failed");
   }
